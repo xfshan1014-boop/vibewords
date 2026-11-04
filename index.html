@@ -168,7 +168,7 @@ html[data-lang="zh"] .ttl{letter-spacing:.02em}
 .stk i.l1{transform:none;z-index:3}
 .stk i.fly{transform:translate(130px,-10px) rotate(22deg);opacity:0;z-index:4}
 .scr{font:900 34px/1 var(--disp);white-space:nowrap}
-.scr .x{font-family:var(--mono);font-size:.7em;color:var(--c)}
+.scr .sx{font-family:var(--mono);font-size:.7em;color:var(--c)}
 .rev{position:relative;width:150px;height:96px;border-radius:12px;border:1.5px solid var(--ink);overflow:hidden}
 .rev .th{position:absolute;inset:0;padding:12px}
 .rev .lt{background:var(--card)}
@@ -1155,6 +1155,52 @@ html{scroll-padding-top:24px}
   .spec{font-size:11px}
   .ttl{font-size:12.5vw;white-space:nowrap}
 }
+/* small or touch screens: the whole card opens the detail, so Open and replay go */
+.on-ph{display:none}
+@media (max-width:900px),(hover:none){
+  .card{cursor:pointer}
+  .card .rp,.card .more{display:none}
+  .on-ph{display:inline}.on-dk{display:none}
+}
+/* phones: one row per word, like a dictionary, and much less on the page */
+@media (max-width:560px){
+  .formula,#coolCnt{display:none}
+  .panel{padding-top:52px;padding-bottom:84px}
+  .panel-0{padding-bottom:84px}
+  .panel.tone-quiz{min-height:0}
+  .card.rv{opacity:1;transform:none}
+  #cool,.grid{grid-template-columns:minmax(0,1fr);gap:8px}
+  #cool{grid-template-areas:none}
+  #cool .card{grid-area:auto!important}
+  #cool .card:nth-child(1),#cool .card:nth-child(3),#cool .card:nth-child(7),#cool .card:nth-child(8){display:none}
+  .card{flex-direction:row;align-items:center;gap:12px;padding:6px;border-radius:13px}
+  .card .stage,#cool .big2 .stage{flex:none;width:96px;height:68px;min-height:0}
+  .grid .stage>:not(.rp):not(.tap),#cool .big2 .stage>:not(.rp):not(.tap),#cool .wide .stage>:not(.rp):not(.tap){transform:none;zoom:.42}
+  .cbody{flex:1;min-width:0;padding:0;align-items:center}
+  .cbody::after{content:"›";font-size:20px;line-height:1;color:var(--muted);padding-right:8px}
+  .nm{font-size:16px;line-height:1.25}
+  .qz{min-height:0}
+  .qz-st{min-height:170px}
+  .qz-st .zoom{transform:none}
+  .qz-q{font-size:20px;margin-bottom:8px}
+  .qz-o button{padding:8px 12px;font-size:14px}
+  .sty-body .ov{display:none}
+  /* detail: the prompt comes right after the explanation */
+  .dlg>.stage{min-height:170px}
+  .dlg>.stage .zoom{transform:scale(1.2)}
+  .dbody{display:flex;flex-direction:column}
+  .dbody>*{order:2}
+  .dbody>.dmeta,.dbody>h3,.dbody>.alt,.dbody>.desc{order:0}
+  .dbody>.say{order:1;margin-bottom:14px}
+}
+@media (max-width:360px){.card .stage,#cool .big2 .stage{width:84px}.nm{font-size:15px}}
+/* touch screens: a tap must not leave the hover look stuck on */
+@media (hover:none){
+  .card:hover,.sty:hover{transform:none;box-shadow:none}
+  .chip:hover,.q-opts button:hover,.qz-o button:not(:disabled):hover,.rpl:hover,.cp:hover{transform:none;box-shadow:none}
+  .cpbtn:hover{transform:none;box-shadow:2px 2px 0 var(--ink)}
+  .stage .tap,.stage:hover .tap{display:none}
+}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -1179,7 +1225,7 @@ html{scroll-padding-top:24px}
 
   <div class="sec">
     <h2><x-zh>见过，但<em>叫不出</em>名字</x-zh><x-en>Seen it, <em>can't name it</em></x-en></h2>
-    <div class="r"><span class="mono" id="coolCnt"></span><x-zh>点动画区自己玩，点「详情」看提示词</x-zh><x-en>Tap a demo to play; open one for the prompt</x-en></div>
+    <div class="r"><span class="mono" id="coolCnt"></span><span class="on-dk"><x-zh>点动画区自己玩，点「详情」看提示词</x-zh><x-en>Tap a demo to play; open one for the prompt</x-en></span><span class="on-ph"><x-zh>点开任意一个，看怎么跟 AI 说</x-zh><x-en>Open any one to see what to tell your AI</x-en></span></div>
   </div>
   <div class="grid" id="cool"></div>
 
@@ -1660,7 +1706,7 @@ function cardHTML(t){
   return `<div class="card" data-id="${t.id}" style="--c:var(--${c})">
   <div class="meta"><span class="k"><i></i>${L(...cn)}</span><span>No. ${t.no}</span></div>
   <div class="stage">${t.demo()}<button class="rp" aria-label="Replay">${REPLAY}</button><span class="tap">${L('点我玩','tap to play')}</span></div>
-  <div class="cbody"><h3 class="nm">${L(...t.n)}</h3>
+  <div class="cbody"><h3 class="nm">${L(t.n[0],t.n[1].replace(/ (\S+)$/,(m,w,i,all)=>all.indexOf(' ')<i?'\u00a0'+w:m))}</h3>
     ${t.s?`<dl class="spec">${t.s.map((v,j)=>`<div><dt>${L(...SPEC[j])}</dt><dd>${Array.isArray(v)?L(...v):v}</dd></div>`).join('')}</dl>`:''}
     <button class="more">${L('详情 →','Open →')}</button></div></div>`;
 }
@@ -1685,12 +1731,13 @@ function applyFilter(){
   galOpen=false;limitGal();
 }
 let galOpen=false;
+const galN=()=>matchMedia('(max-width:560px)').matches?6:8;
 function limitGal(){
   const m=document.getElementById('galMore'),all=[...gal.children].filter(el=>filter==='all'||byId[el.dataset.id][mode]===filter);
   [...gal.children].forEach(el=>el.hidden=true);
-  all.forEach((el,i)=>el.hidden=!galOpen&&i>=8);
+  all.forEach((el,i)=>el.hidden=!galOpen&&i>=galN());
   if(!m)return;
-  m.hidden=all.length<=8;
+  m.hidden=all.length<=galN();
   m.innerHTML=galOpen?L('收起','Show less'):L(`查看全部 ${all.length} 个`,`See all ${all.length}`);
 }
 document.querySelectorAll('#mode button').forEach(b=>b.onclick=()=>{
@@ -1715,7 +1762,7 @@ function rollNum(el){
 function scramble(el){
   const target=lang()==='zh'?'设计语言':'Words',glyph='▓▒░#%&@*<>/',t0=performance.now();cancelAnimationFrame(el._r);
   const f=now=>{const k=Math.min(1,(now-t0)/1000),d=Math.floor(k*target.length);
-    el.innerHTML=[...target].map((ch,i)=>i<d?ch:`<span class="x">${glyph[Math.random()*glyph.length|0]}</span>`).join('');if(k<1)el._r=requestAnimationFrame(f)};
+    el.innerHTML=[...target].map((ch,i)=>i<d?ch:`<span class="sx">${glyph[Math.random()*glyph.length|0]}</span>`).join('');if(k<1)el._r=requestAnimationFrame(f)};
   el._r=requestAnimationFrame(f);
 }
 function reset(root){
@@ -1743,24 +1790,26 @@ function play(root){reset(root);clearTimeout(root._t);root._t=setTimeout(()=>tur
 function attachLive(root,owner){
   const mag=root.querySelector('.mag');
   if(mag){const st=mag.closest('.stage'),w=root.querySelector('.magw');
-    st.addEventListener('pointermove',e=>{owner._live=true;w.classList.add('live');w.classList.remove('on');
+    st.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;owner._live=true;w.classList.add('live');w.classList.remove('on');
       const r=mag.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);mag.style.transform=`translate(${dx*.35}px,${dy*.35}px)`});
     st.addEventListener('pointerleave',()=>{mag.style.transform='';w.classList.remove('live');owner._live=false});}
   const tc=root.querySelector('.tcard');
   if(tc){const st=tc.closest('.stage'),tw=root.querySelector('.tiltw');
-    st.addEventListener('pointermove',e=>{const r=st.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    st.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const r=st.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
       tw.classList.add('live');tc.style.transform=`rotateY(${(x-.5)*36}deg) rotateX(${(.5-y)*28}deg)`;tc.style.setProperty('--gx',x*100+'%');tc.style.setProperty('--gy',y*100+'%')});
     st.addEventListener('pointerleave',()=>{tw.classList.remove('live');tc.style.transform=''});}
 }
 const cards=[...document.querySelectorAll('.card')];
+const cardOpens=matchMedia('(max-width:900px),(hover:none)');
 function wire(c){
   attachLive(c,c);
-  c.querySelector('.stage').onclick=()=>play(c);
+  c.onclick=()=>{if(cardOpens.matches)openDetail(byId[c.dataset.id])};
+  c.querySelector('.stage').onclick=e=>{if(!cardOpens.matches){e.stopPropagation();play(c)}};
   c.querySelector('.rp').onclick=e=>{e.stopPropagation();play(c)};
-  c.querySelector('.more').onclick=()=>openDetail(byId[c.dataset.id]);
+  c.querySelector('.more').onclick=e=>{e.stopPropagation();openDetail(byId[c.dataset.id])};
 }
 cards.forEach(wire);
-setInterval(()=>document.querySelectorAll('.card,.hit,.qz-st').forEach(c=>{if(!c._live&&c.offsetParent)play(c)}),3800);
+setInterval(()=>document.querySelectorAll('.card,.hit,.qz-st').forEach(c=>{if(c._live||!c.offsetParent)return;const r=c.getBoundingClientRect();if(r.bottom>-80&&r.top<innerHeight+80)play(c)}),3800);
 
 // ---------- detail popup ----------
 const dlg=document.getElementById('dlg'),bd=document.getElementById('bd');
@@ -2193,7 +2242,7 @@ const AREAS=['a','b','d','c','e','f','g','h'];
 [...document.querySelectorAll('#cool .card')].forEach((c,i)=>{c.style.gridArea=AREAS[i];if(i===0)c.classList.add('big2');if(i===2)c.classList.add('wide')});
 // gallery folds to two rows
 gal.insertAdjacentHTML('afterend','<button class="gal-more" id="galMore"></button>');
-document.getElementById('galMore').onclick=()=>{const was=galOpen;galOpen=!galOpen;limitGal();if(!was){const n=[...gal.children].filter(c=>!c.hidden).slice(8);n.forEach((c,i)=>c.animate([{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:420,delay:Math.min(i,12)*28,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}))}else glide(gal)};
+document.getElementById('galMore').onclick=()=>{const was=galOpen;galOpen=!galOpen;limitGal();if(!was){const n=[...gal.children].filter(c=>!c.hidden).slice(galN());n.forEach((c,i)=>c.animate([{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:420,delay:Math.min(i,12)*28,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}))}else glide(gal)};
 limitGal();
 
 // ---------- language: follows the system, switch is remembered ----------
