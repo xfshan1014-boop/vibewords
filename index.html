@@ -1004,9 +1004,9 @@ html{overflow-x:clip}
 .hx .seg{--ink:#2B2118;--card:#FFFBF3;--paper:#F5EEDF;--muted:#7A6B5A}
 .hx-in{position:relative;z-index:3;width:min(1100px,calc(100% - 36px));text-align:center;opacity:calc(1 - var(--p,0)*1.3);transition:transform .45s cubic-bezier(.32,.72,0,1)}
 .hx .sticker{color:#2B2118;background:#FFFBF3;border-color:#2B2118;box-shadow:3px 3px 0 #2B2118;margin-bottom:10px;transition:opacity .2s}
-.hx-t{font:900 min(15.5vw,31vh)/1.02 var(--disp);letter-spacing:-.02em;white-space:nowrap;user-select:none;transition:opacity .2s}
-.hx-t{text-shadow:0.008em 0.008em 0 #2B2118,0.016em 0.016em 0 #2B2118,0.024em 0.024em 0 #2B2118,0.032em 0.032em 0 #2B2118,0.040em 0.040em 0 #2B2118,0.048em 0.048em 0 #2B2118,0.056em 0.056em 0 #2B2118,0.064em 0.064em 0 #2B2118,0.072em 0.072em 0 #2B2118,0.080em 0.080em 0 #2B2118,0.088em 0.088em 0 #2B2118}
-.hx-t em{color:#2B2118;text-shadow:0.008em 0.008em 0 #FBF3E4,0.016em 0.016em 0 #FBF3E4,0.024em 0.024em 0 #FBF3E4,0.032em 0.032em 0 #FBF3E4,0.040em 0.040em 0 #FBF3E4,0.048em 0.048em 0 #FBF3E4,0.056em 0.056em 0 #FBF3E4,0.064em 0.064em 0 #FBF3E4,0.072em 0.072em 0 #FBF3E4,0.080em 0.080em 0 #FBF3E4,0.088em 0.088em 0 #FBF3E4}
+.hx-t{display:flex;justify-content:center;font:900 min(13.6vw,28vh)/1.02 var(--disp);letter-spacing:-.02em;white-space:nowrap;user-select:none;transition:opacity .2s}
+.hx-t{text-shadow:0.0055em 0.0055em 0 #2B2118,0.0110em 0.0110em 0 #2B2118,0.0165em 0.0165em 0 #2B2118,0.0220em 0.0220em 0 #2B2118,0.0275em 0.0275em 0 #2B2118}
+.hx-t em{color:#2B2118;text-shadow:0.0055em 0.0055em 0 #FBF3E4,0.0110em 0.0110em 0 #FBF3E4,0.0165em 0.0165em 0 #FBF3E4,0.0220em 0.0220em 0 #FBF3E4,0.0275em 0.0275em 0 #FBF3E4}
 .hx-l{position:relative;z-index:2;margin:16px auto 0;max-width:560px;font-size:18px;transition:opacity .2s}
 .ch{display:inline-block;transition:transform .5s cubic-bezier(.34,1.56,.64,1);animation:wave 3.6s ease-in-out infinite;animation-delay:calc(var(--i)*.14s)}
 @keyframes wave{0%,60%,100%{translate:0 0}30%{translate:0 -10px}}
@@ -1032,11 +1032,10 @@ html{overflow-x:clip}
 .tile{flex:none;position:relative;display:block;width:200px;height:var(--tile);border:1.5px solid #2B2118;border-radius:14px;background:#FFFBF3;color:#2B2118;box-shadow:6px 6px 0 #2B2118;overflow:hidden;cursor:pointer;padding:0;--c:var(--acc);--ink:#2B2118;--card:#FFFBF3;--paper:#F5EEDF;--paper-2:#EDE3CF;--muted:#7A6B5A;--line:#DCCDB2;--hair:rgba(43,33,24,.16)}
 .tile .z{position:absolute;left:50%;top:50%;width:200px;height:150px;transform:translate(-50%,-50%) scale(.82);display:grid;place-items:center;pointer-events:none;transition:opacity .25s ease-out}
 .tile.swap .z{opacity:0}
-.flo{position:absolute;z-index:var(--z,1);width:var(--fw,200px);transition:translate .6s cubic-bezier(.34,1.56,.64,1);animation:bob 7s ease-in-out infinite alternate;animation-delay:var(--dl)}
-.flo .tile{width:100%;height:calc(var(--fw,200px)*.74);box-shadow:1px 1px 0 #2B2118,2px 2px 0 #2B2118,3px 3px 0 #2B2118,4px 4px 0 #2B2118,5px 5px 0 #2B2118,6px 6px 0 #2B2118,7px 7px 0 #2B2118,8px 8px 0 #2B2118,9px 9px 0 #2B2118,10px 10px 0 #2B2118}
+.flo{position:absolute;z-index:1;width:var(--fw,200px);transition:translate .6s cubic-bezier(.34,1.56,.64,1);animation:bob 7s ease-in-out infinite alternate;animation-delay:var(--dl)}
+.flo .tile{width:100%;height:calc(var(--fw,200px)*.74);box-shadow:5px 5px 0 #2B2118}
 .flo .tile .z{transform:translate(-50%,-50%) scale(var(--zs,.82))}
 @keyframes bob{from{transform:rotate(var(--r)) translateY(-7px)}to{transform:rotate(calc(var(--r)*.6)) translateY(9px)}}
-@media (max-width:1250px){.flo{z-index:1}}
 @media (max-width:1000px) and (max-height:720px){.flo{display:none}}
 @media (max-width:1000px){
   .hx{--tile:100px}
@@ -1075,6 +1074,79 @@ html{overflow-x:clip}
 #cool .big2 .stage>:not(.rp):not(.tap){zoom:1.7}
 #cool .wide .stage>:not(.rp):not(.tap){zoom:1.25}
 @media (max-width:900px){#cool{grid-template-areas:"a a" "b c" "d d" "e f" "g h"}#cool .big2 .stage{min-height:250px}#cool .big2 .stage>:not(.rp):not(.tap){zoom:1.3}}
+
+
+/* ===== floating side nav ===== */
+.rail{position:fixed;left:16px;top:50%;z-index:20;display:grid;gap:2px;padding:6px;border:1.5px solid var(--ink);border-radius:14px;background:var(--card);box-shadow:3px 3px 0 var(--ink);transform:translate(-14px,-50%);opacity:0;pointer-events:none;transition:opacity .2s ease-in,transform .2s ease-in}
+.rail.show{opacity:1;pointer-events:auto;transform:translate(0,-50%);transition:opacity .25s ease-out,transform .35s cubic-bezier(.32,.72,0,1)}
+.rail button{position:relative;display:flex;align-items:center;gap:9px;border:0;background:none;color:var(--muted);font:600 13px var(--body);padding:6px 8px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:color .2s}
+.rail button::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--muted);background:transparent;transition:background .2s,border-color .2s,transform .3s cubic-bezier(.34,1.56,.64,1)}
+.rail button:hover{color:var(--ink)}
+.rail button.on{color:var(--ink);font-weight:700}
+.rail button.on::before{background:var(--acc);border-color:var(--acc);transform:scale(1.35)}
+.rail i{position:absolute;left:18px;top:22px;bottom:22px;width:1.5px;background:var(--line);z-index:-1}
+@media (max-width:1420px){
+  .rail span{position:absolute;left:30px;padding:2px 9px;border-radius:7px;background:var(--ink);color:var(--paper);opacity:0;transform:translateX(-6px);pointer-events:none;transition:opacity .15s,transform .2s ease-out}
+  .rail button:hover span{opacity:1;transform:none}
+}
+@media (max-width:960px){.rail{display:none}}
+/* ===== quiz ===== */
+.qz{display:grid;grid-template-columns:1.25fr 1fr;gap:8px;border:1.5px solid var(--ink);border-radius:18px;background:var(--card);padding:8px;min-height:330px}
+.qz-st{position:relative;border-radius:12px;background:var(--paper-2);display:grid;place-items:center;overflow:hidden;min-height:310px}
+.qz-st .zoom{transform:scale(1.7);width:190px;display:grid;place-items:center;pointer-events:none}
+.qz-st .anl{display:none}
+.qz-b{display:flex;flex-direction:column;padding:18px 18px 14px}
+.qz-p{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:14px}
+.qz-p i{height:5px;border-radius:3px;background:var(--line)}
+.qz-p i.ok{background:var(--c4)}.qz-p i.no{background:var(--acc)}.qz-p i.now{background:var(--ink)}
+.qz-q{font:900 24px/1.25 var(--disp);margin-bottom:12px}
+.qz-o{display:grid;gap:8px}
+.qz-o button{border:1.5px solid var(--ink);border-radius:12px;background:var(--card);color:var(--ink);font:600 15px var(--body);text-align:left;padding:10px 14px;cursor:pointer;transition:transform .15s ease-out,box-shadow .15s ease-out,background .2s,color .2s}
+.qz-o button:not(:disabled):hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.qz-o button:disabled{cursor:default;color:var(--muted);border-color:var(--line)}
+.qz-o button.right{background:var(--c4);color:#fff;border-color:var(--ink)}
+.qz-o button.wrong{background:var(--acc);color:#fff;border-color:var(--ink)}
+.qz-f{margin-top:12px;font-size:14px;min-height:64px}
+.qz-a{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;padding-top:10px}
+.qz-go{border:1.5px solid var(--ink);border-radius:10px;background:var(--ink);color:var(--paper);font:700 14px var(--body);padding:7px 16px;cursor:pointer}
+.qz-end{grid-column:1/-1;display:grid;place-items:center;text-align:center;gap:6px;padding:34px 16px}
+.qz-end b{font:900 64px/1 var(--disp);color:var(--acc)}
+.qz-end h3{font:900 24px var(--disp)}
+.qz-end p{color:var(--muted);margin-bottom:10px}
+@media (max-width:760px){.qz{grid-template-columns:minmax(0,1fr)}.qz-st{min-height:230px}.qz-st .zoom{transform:scale(1.25)}}
+/* ===== word bank folds ===== */
+.bank{align-items:start}
+.cat{padding:0;overflow:hidden}
+.cat-top{margin:0;padding:13px 16px;cursor:pointer;align-items:center;user-select:none}
+.cat-top::after{content:"›";font-size:18px;line-height:1;transition:transform .25s ease-in-out}
+.cat.open .cat-top::after{transform:rotate(90deg)}
+.cat h3{font-size:17px;flex:1}
+.cat .wcount{font:500 12px var(--mono);color:var(--muted)}
+.cat-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease-in-out}
+.cat.open .cat-b{grid-template-rows:1fr}
+.cat-b>div{overflow:hidden}
+.cat-b .words{padding:0 16px 14px}
+
+
+/* ===== sections: stacked sheets with room to breathe ===== */
+html{scroll-padding-top:24px}
+.a-rail{position:absolute;left:7px;top:22%;bottom:22%;width:14px;border-radius:6px;background:var(--line)}
+#main{padding-bottom:0}
+#viewStyles{padding-bottom:110px}
+.sec{margin-bottom:30px}
+.sec h2{font-size:clamp(34px,5vw,62px)}
+.panel,.panel-0{position:relative}
+.panel-0{padding:20px 0 150px}
+.panel{margin:-44px calc(50% - 50vw) 0;padding:96px calc(50vw - 50%) 150px;border-top:1.5px solid #2B2118;border-radius:44px 44px 0 0;box-shadow:0 -8px 0 #2B2118}
+.panel.tone-gal{background:var(--paper-2)}
+.panel.tone-gal .term,.panel.tone-gal .stage{background:var(--paper)}
+.panel.tone-quiz{min-height:100vh;display:flex;flex-direction:column;justify-content:center;background:#1E1712;color:#F1E8D8;--paper:#1E1712;--paper-2:#2E241C;--card:#261D16;--ink:#F1E8D8;--muted:#B3A48F;--line:#4A3D31;--hair:rgba(241,232,216,.16)}
+.panel.tone-bank{background:var(--paper);padding-bottom:70px}
+.site-end{margin-top:90px;padding-top:22px;border-top:1px solid var(--hair);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.site-end b{font:900 18px var(--disp);color:var(--ink)}
+.rv{opacity:0;transform:translateY(30px)}
+.rv.in{opacity:1;transform:none;transition:opacity .6s ease-out,transform .75s cubic-bezier(.22,1,.36,1);transition-delay:calc(var(--i,0)*70ms)}
+@media (max-width:760px){.panel{padding-top:70px;padding-bottom:100px;border-radius:30px 30px 0 0}.panel-0{padding-bottom:110px}}
 
 @media (max-width:560px){
   .grid .stage .magw,.grid .stage .tiltw,.grid .stage .rev,.grid .stage .d-scr,.grid .stage .d-car,.grid .stage .d-dd,.grid .stage .d-swipe,.grid .stage .d-tbl,.grid .stage .d-stat,.grid .stage .d-mas,.grid .stage .d-pgn,.grid .stage .d-prog,.grid .stage .d-tag,.grid .stage .d-bc,.grid .stage .d-steps,.grid .stage .d-anc,.grid .stage .d-snap,.grid .stage .d-cas,.grid .stage .d-date,.grid .stage .d-ac,.grid .stage .d-tf,.grid .stage .d-sld,.grid .stage .d-sg,.grid .stage .d-val,.grid .stage .d-up,.grid .stage .an,.grid .stage .d-sb,.grid .stage .d-ph,.grid .stage .d-dv,.grid .stage .d-sp{transform:scale(.8)}
@@ -1128,13 +1200,9 @@ html{overflow-x:clip}
   </div>
 
   <div class="block">
-    <div class="sec"><h2><x-zh>看动画<em>猜名字</em></x-zh><x-en>Name that <em>motion</em></x-en></h2><span class="tag"><x-zh>小测验</x-zh><x-en>Quiz</x-en></span></div>
-    <div class="quiz">
-      <div class="q-meta" id="qmeta"></div>
-      <div class="q-stage" id="qstage"><i class="q-box" id="qbox"></i></div>
-      <div class="q-opts" id="qopts"></div>
-      <div class="q-fb" id="qfb"></div>
-    </div>
+    <div class="sec"><h2><x-zh>看一眼，<em>叫出名字</em></x-zh><x-en>One look, <em>name it</em></x-en></h2><div class="r"><x-zh>5 题，看看你能跟 AI 说多少</x-zh><x-en>5 quick ones to test your vocabulary</x-en></div></div>
+    <div class="chips" id="qzChips"></div>
+    <div class="qz" id="qz"></div>
   </div>
   </div>
   <div class="view" id="viewStyles" hidden>
@@ -1144,6 +1212,7 @@ html{overflow-x:clip}
   </div>
 </div>
 <div class="sv" id="sv" role="dialog" aria-modal="true"><div class="sv-bar"><button class="back" id="svBack">← <x-zh>返回</x-zh><x-en>Back</x-en></button><b id="svName"></b><button class="cpbtn" id="svCopy"></button></div><div class="sv-body"><div class="site" id="svSite"></div></div></div>
+<nav class="rail" id="rail" aria-label="Sections"></nav>
 <div class="dlg-bd" id="bd"></div>
 <div class="dlg" id="dlg" role="dialog" aria-modal="true"></div>
 
@@ -1556,6 +1625,11 @@ const T=[
   w:['觉得页面"挤"的时候，通常就是这两个太小。','When a page feels cramped, these two are usually too small.'],
   demo:()=>`<div class="d-sp"><div class="pd"><div class="ct2">${L('内容','Content')}</div></div></div>`,
   p:['加大卡片的内边距到 24px，卡片之间的外边距用 24px，所有间距都用 8 的倍数。','Increase card padding to 24px and the margin between cards to 24px, and keep all spacing in multiples of 8.']}
+,
+ {id:'sidenav',scene:'nav',goal:'guide',n:['悬浮侧边导航','Floating side nav'],alt:['也叫：浮动目录、Scrollspy 导航','Also: floating table of contents, scrollspy nav'],
+  d:['滚动长页面时浮在一侧的小目录，告诉你在哪一段，点一下就跳过去。','A small menu that floats beside a long page, showing where you are and jumping on tap.'],
+  demo:()=>`<div class="an"><div class="a-h"></div><i class="a-rail hl"></i><span class="anl" style="left:34px;top:46px">${L('悬浮导航','Side nav')}</span></div>`,
+  p:['页面滑过首屏后，左侧淡入一个悬浮导航，列出各个区块；滚动时自动高亮当前区块（Scrollspy），点击平滑跳转到对应位置。','After the hero, fade in a floating nav on the left listing the sections; highlight the current one while scrolling (scrollspy) and smooth-scroll to a section on click.']}
 ];
 T.forEach((t,i)=>t.no=String(i+1).padStart(3,'0'));
 const byId=Object.fromEntries(T.map(t=>[t.id,t]));
@@ -1574,7 +1648,7 @@ const BANK=[
  ['form',['dropdown','select','cascader','datepicker','autocomplete','transfer','slider','rating','upload','segmented','stepper','validation'],[]],
  ['data',['num','zebra','rightalign','rowact','sticky','sort','pagination'],[['批量选择','Bulk select'],['可展开行','Expandable row'],['迷你趋势图','Sparkline']]],
  ['wait',['scr','skel','spin','progress'],[['乐观更新','Optimistic UI'],['懒加载','Lazy loading'],['模糊渐显','Blur-up image'],['加载更多','Load more']]],
- ['nav',['rev','tabs','breadcrumb','steps','anchor','backtop','fab','tabbar','shared','snap','parallax','stickyhd'],[]],
+ ['nav',['rev','tabs','breadcrumb','steps','anchor','backtop','fab','tabbar','shared','snap','parallax','stickyhd','sidenav'],[]],
  ['page',['navbar','hero','fold','footer','sidebar','cta','btnlevels','searchbar','placeholder','cardbase','scrim','divider','pill','iconbtn','container','spacing'],[]],
  ['base',[],[['栅格','Grid'],['间距体系','Spacing scale'],['留白','Whitespace'],['视觉层级','Visual hierarchy'],['字阶','Type scale'],['行高','Line height'],['设计令牌','Design tokens'],['语义色','Semantic colors'],['阴影层级','Elevation'],['圆角','Corner radius'],['深色模式','Dark mode'],['对比度','Contrast ratio']]]
 ];
@@ -1603,7 +1677,7 @@ const chips=document.getElementById('chips');
 function renderChips(){
   chips.innerHTML=`<button class="chip${filter==='all'?' on':''}" data-f="all" style="--c:var(--ink)"><i></i>${L('全部','All')}<em>${T.length}</em></button>`+
     CATS[mode].filter(([k])=>T.some(t=>t[mode]===k)).map(([k,n,c])=>`<button class="chip${filter===k?' on':''}" data-f="${k}" style="--c:var(--${c})"><i></i>${L(...n)}<em>${T.filter(t=>t[mode]===k).length}</em></button>`).join('');
-  chips.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{filter=b.dataset.f;renderChips();applyFilter()});
+  chips.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{filter=b.dataset.f;renderChips();applyFilter();glide(gal)});
 }
 function applyFilter(){
   const order=CATS[mode].map(c=>c[0]);
@@ -1686,7 +1760,7 @@ function wire(c){
   c.querySelector('.more').onclick=()=>openDetail(byId[c.dataset.id]);
 }
 cards.forEach(wire);
-setInterval(()=>document.querySelectorAll('.card,.hit:not(#reelSt)').forEach(c=>{if(!c._live&&c.offsetParent)play(c)}),3800);
+setInterval(()=>document.querySelectorAll('.card,.hit,.qz-st').forEach(c=>{if(!c._live&&c.offsetParent)play(c)}),3800);
 
 // ---------- detail popup ----------
 const dlg=document.getElementById('dlg'),bd=document.getElementById('bd');
@@ -1772,36 +1846,89 @@ const catInfo=k=>k==='base'?['base',['视觉基础','Visual foundations'],'ink']
 document.getElementById('bankTitle').innerHTML=L(`完整词库：<em>${TOTAL}</em> 个词`,`Word bank: <em>${TOTAL}</em> terms`);
 // words without a demo stay in BANK for later and aren't shown yet
 document.getElementById('bank').innerHTML=BANK.filter(([,done])=>done.length).map(([k,done])=>{const [,n,c]=catInfo(k);return `<div class="cat" style="--c:var(--${c})">
-  <div class="cat-top"><h3><i></i>${L(...n)}</h3></div>
-  <div class="words">${done.map(id=>`<button data-id="${id}">${L(...byId[id].n)}</button>`).join('')}</div></div>`}).join('');
+  <div class="cat-top" role="button" tabindex="0"><h3><i></i>${L(...n)}</h3><span class="wcount">${done.length}</span></div>
+  <div class="cat-b"><div><div class="words">${done.map(id=>`<button data-id="${id}">${L(...byId[id].n)}</button>`).join('')}</div></div></div></div>`}).join('');
+document.querySelectorAll('.cat-top').forEach(h=>{h.onclick=()=>h.parentElement.classList.toggle('open');h.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();h.click()}}});
 document.querySelectorAll('#bank button').forEach(b=>b.onclick=()=>openDetail(byId[b.dataset.id]));
 
-// ---------- quiz ----------
-const Q=[
-  {e:'ease-out',a:[['缓入','Ease-in'],['缓出','Ease-out'],['线性','Linear']],k:1,why:['开头快、结尾慢地落定，这是缓出。','Fast start, gentle stop: that is ease-out.']},
-  {e:'linear',a:[['线性','Linear'],['缓入缓出','Ease-in-out'],['回弹','Spring']],k:0,why:['从头到尾速度不变，这是线性。','Same speed the whole way: that is linear.']},
-  {e:'cubic-bezier(.34,1.56,.64,1)',a:[['缓出','Ease-out'],['缓入','Ease-in'],['回弹','Spring']],k:2,why:['冲过终点再弹回来，这是回弹。','Overshoots, then settles back: that is a spring.']},
-  {e:'ease-in',a:[['缓入','Ease-in'],['缓出','Ease-out'],['缓入缓出','Ease-in-out']],k:0,why:['慢慢起步、越来越快，这是缓入，常用于离场。','Slow start that speeds up: that is ease-in, often used for exits.']}
-];
-let qi=0,score=0,qloop;
-const qbox=document.getElementById('qbox'),qopts=document.getElementById('qopts'),qfb=document.getElementById('qfb'),qmeta=document.getElementById('qmeta');
-const meta=()=>qmeta.innerHTML=L(`第 ${qi+1} / ${Q.length} 题 · 得分 ${score}`,`Question ${qi+1} of ${Q.length} · Score ${score}`);
-function runQ(){
-  clearInterval(qloop);const q=Q[qi],st=document.getElementById('qstage');
-  meta();qfb.innerHTML=L('动画会自动循环，看清楚再选','The animation loops, so take your time');
-  const go=()=>{const d=st.clientWidth-76;qbox.style.transition='none';qbox.style.transform='translateX(0)';
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{qbox.style.transition=`transform 1100ms ${q.e}`;qbox.style.transform=`translateX(${d}px)`}))};
-  go();qloop=setInterval(go,2000);
-  qopts.innerHTML='';delete qopts.dataset.done;
-  q.a.forEach((t,i)=>{const b=document.createElement('button');b.innerHTML=L(...t);
-    b.onclick=()=>{if(qopts.dataset.done)return;qopts.dataset.done=1;const ok=i===q.k;if(ok)score++;
-      b.classList.add(ok?'right':'wrong');qopts.children[q.k].classList.add('right');
-      qfb.innerHTML=(ok?L('✓ 对了！','✓ Correct! '):L('✗ 不对。','✗ Not quite. '))+L(...q.why)+`<button class="q-next" id="next">${qi<Q.length-1?L('下一题','Next'):L('再来一轮','Play again')}</button>`;
-      meta();document.getElementById('next').onclick=()=>{qi=(qi+1)%Q.length;if(qi===0)score=0;runQ()}};
-    qopts.appendChild(b)});
+// ---------- quiz: real demos, name what you see ----------
+const QF=[['all',['全部混合','Mixed']],['page',['页面结构','Page anatomy']],['overlay',['弹窗与提示','Overlays']],['tap',['点击反馈','Tap feedback']]];
+const qzEl=document.getElementById('qz'),qzChips=document.getElementById('qzChips');
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let qf='all',qr=[],qi=0,qs=[];
+function startQuiz(){
+  const pool=T.filter(t=>qf==='all'||t.scene===qf);qr=shuffle(pool).slice(0,5);qi=0;qs=[];showQ();
+  qzChips.innerHTML=QF.map(([k,n])=>`<button class="chip${k===qf?' on':''}" data-k="${k}" style="--c:var(--acc)"><i></i>${L(...n)}</button>`).join('');
+  qzChips.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{qf=c.dataset.k;startQuiz()});
 }
-runQ();
+const dots=()=>`<div class="qz-p">${qr.map((_,i)=>`<i class="${qs[i]===true?'ok':qs[i]===false?'no':i===qi?'now':''}"></i>`).join('')}</div>`;
+function showQ(){
+  const t=qr[qi],same=T.filter(x=>x.id!==t.id&&x.scene===t.scene),others=shuffle(same).slice(0,2),opts=shuffle([t,...others]);
+  qzEl.innerHTML=`<div class="qz-st" id="qzSt"><div class="zoom">${t.demo()}</div></div><div class="qz-b">${dots()}<div class="qz-q">${t.scene==='page'?L('高亮的这一块叫什么？','What is this called?'):L('这个效果叫什么？','What is this effect called?')}</div>
+    <div class="qz-o">${opts.map(o=>`<button data-id="${o.id}">${L(...o.n)}</button>`).join('')}</div><div class="qz-f" id="qzF"></div><div class="qz-a" id="qzA"></div></div>`;
+  const st=document.getElementById('qzSt');turnOn(st);st.querySelectorAll('.d-tabs').forEach(moveTab);
+  qzEl.querySelectorAll('.qz-o button').forEach(b=>b.onclick=()=>{
+    const ok=b.dataset.id===t.id;qs[qi]=ok;
+    qzEl.querySelectorAll('.qz-o button').forEach(x=>{x.disabled=true;if(x.dataset.id===t.id)x.classList.add('right')});
+    if(!ok)b.classList.add('wrong');
+    qzEl.querySelector('.qz-p').outerHTML=dots();
+    document.getElementById('qzF').innerHTML=L(...t.d);
+    const last=qi===qr.length-1;
+    document.getElementById('qzA').innerHTML=`<button class="more" id="qzD">${L('看详情 →','Details →')}</button><button class="qz-go" id="qzN">${last?L('看成绩','See score'):L('下一题','Next')}</button>`;
+    document.getElementById('qzD').onclick=()=>openDetail(t);
+    document.getElementById('qzN').onclick=()=>{if(last)endQ();else{qi++;showQ()}};
+  });
+}
+function endQ(){
+  const n=qs.filter(Boolean).length,msg=n===5?['可以直接指挥 AI 了','You can direct your AI now']:n>=3?['已经能说清大部分了','You can name most of these']:['再逛逛图鉴，马上就会了','Browse the gallery and try again'];
+  qzEl.innerHTML=`<div class="qz-end"><b>${n} / 5</b><h3>${L(...msg)}</h3><p>${L('换一组继续练','Try a fresh set')}</p><button class="qz-go" id="qzR">${L('再来一轮','Play again')}</button></div>`;
+  document.getElementById('qzR').onclick=startQuiz;
+}
+startQuiz();
 
+// ---------- page order + floating side nav ----------
+const blocks=[...document.querySelectorAll('#viewTerms>.block')];
+const [bGal,bBank,bQuiz]=blocks;bBank.before(bQuiz);
+const SECS=[['cool',['叫不出名字','Can\'t name it'],document.querySelector('#viewTerms>.sec')],['gal',['全部图鉴','Full gallery'],bGal],['quiz',['小测验','Quiz'],bQuiz],['bank',['词库','Word bank'],bBank],['styles',['界面风格','UI styles'],document.getElementById('tabs')]];
+const rail=document.getElementById('rail');
+rail.innerHTML='<i></i>'+SECS.map(([k,n])=>`<button data-k="${k}"><span>${L(...n)}</span></button>`).join('');
+const stylesOpen=()=>!document.getElementById('viewStyles').hidden;
+rail.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+  const k=b.dataset.k,sec=SECS.find(x=>x[0]===k)[2];
+  setTab(k==='styles'?'styles':'terms');
+  scrollTo({top:sec.getBoundingClientRect().top+scrollY-24,behavior:'smooth'});
+  spy();
+});
+function spy(){
+  rail.classList.toggle('show',scrollY>innerHeight*.7);
+  let cur='cool';
+  if(stylesOpen())cur='styles';else SECS.slice(0,4).forEach(([k,,el])=>{if(el.getBoundingClientRect().top<innerHeight*.4)cur=k});
+  rail.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===cur));
+}
+addEventListener('scroll',spy,{passive:true});spy();
+document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>setTimeout(spy)));
+
+// ---------- sections as stacked sheets ----------
+{
+  const first=document.createElement('section');first.className='panel-0';
+  const head=document.querySelector('#viewTerms>.sec'),grid=document.getElementById('cool');
+  head.before(first);first.append(head,grid);
+  bGal.classList.add('panel','tone-gal');bQuiz.classList.add('panel','tone-quiz');bBank.classList.add('panel','tone-bank');
+  [bGal,bQuiz,bBank].forEach(b=>b.classList.remove('block'));
+  bBank.insertAdjacentHTML('beforeend',`<footer class="site-end"><b>VibeWords</b><span>Design Language for AI Builders</span></footer>`);
+}
+// ---------- reveal on scroll, then get out of the way ----------
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const el=e.target;io.unobserve(el);el.classList.add('in');
+  setTimeout(()=>{el.classList.remove('rv','in');el.style.removeProperty('--i')},1500);
+}),{threshold:.08,rootMargin:'0px 0px -6% 0px'});
+function reveal(list,step=true){list.forEach((el,i)=>{el.classList.add('rv');if(step)el.style.setProperty('--i',i%4);io.observe(el)})}
+reveal(document.querySelectorAll('#viewTerms .sec,.formula,#qzChips,#qz,.site-end'),false);
+reveal(document.querySelectorAll('#cool .card'));
+reveal([...document.querySelectorAll('#gallery .card')].filter(c=>!c.hidden));
+reveal(document.querySelectorAll('.cat'));
+const glide=el=>el.animate([{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'none'}],{duration:380,easing:'cubic-bezier(.22,1,.36,1)'});
 
 // ---------- classic styles ----------
 const STY=[
@@ -1901,6 +2028,7 @@ function setTab(t){
   document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
   document.getElementById('viewTerms').hidden=t!=='terms';
   document.getElementById('viewStyles').hidden=t!=='styles';
+  glide(document.getElementById(t==='styles'?'viewStyles':'viewTerms'));
 }
 document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
 
@@ -1946,7 +2074,7 @@ const INTENTS=[
  {top:1,lab:['打分','Rating'],why:['让用户给个分数','Lets users give a score'],k:['打分','星星','评价','rate','stars','review'],ids:['rating','slider']},
  {top:1,lab:['操作成功提示','Success message'],why:['短暂告诉用户成功了','Briefly confirms success'],k:['保存成功','已保存','已复制','给个提示','saved','copied'],ids:['toast','morph','check']},
  {top:1,lab:['持续提示','Ongoing warning'],why:['问题解决前一直留着','Stays until it\'s resolved'],k:['断网','网络','一直提示','离线','offline','connection'],ids:['alert','toast']},
- {top:1,lab:['长页面跳转','Long pages'],why:['在长页面里快速跳转','Jump around a long page'],k:['目录','长文章','跳到','table of contents','long article'],ids:['anchor','backtop','stickyhd']},
+ {top:1,lab:['长页面跳转','Long pages'],why:['在长页面里快速跳转','Jump around a long page'],k:['目录','长文章','跳到','侧边导航','悬浮导航','table of contents','long article','side nav','floating nav'],ids:['anchor','sidenav','backtop','stickyhd']},
  {top:1,lab:['回到上面','Back up'],why:['快速回到页面顶部','Jump back to the top'],k:['回到上面','回顶部','回到顶部','快速回去','back to top'],ids:['backtop','anchor']},
  {top:1,lab:['完成任务','Completing tasks'],why:['让"做完了"有满足感','Makes "done" feel good'],k:['打勾','待办','完成任务','清单','checklist','to-do','todo'],ids:['check','progress','like']},
  {lab:['手机 App','Mobile app'],ctx:1,why:['手机上很常用','A mobile staple'],k:['app','手机','移动端','小程序','ios','安卓','mobile','phone'],ids:['sheet','tabbar','swipe','ptr','bdrawer','fab']},
@@ -2027,10 +2155,10 @@ const hx=document.getElementById('hx'),hxBg=document.getElementById('hxBg'),hxT=
 const split=(t,acc)=>t.split(' ').length>1?t.split(' ').map((w,k)=>`<span style="white-space:nowrap">${[...w].map((c,i)=>`<span class="ch" style="--i:${k*7+i}">${k?`<em>${c}</em>`:c}</span>`).join('')}</span>`).join(' '):[...t].map((c,i)=>`<span class="ch" style="--i:${i}">${i>=acc?`<em>${c}</em>`:c}</span>`).join('');
 hxT.innerHTML=split('VibeWords',4);
 const tile=id=>`<button class="tile hit" data-id="${id}"><span class="z">${byId[id].demo()}</span></button>`;
-const SLOTS=[{pos:'left:6vw;top:92px',z:4,d:1,r:'-6deg',ry:'16deg',rx:'6deg',ids:['mag','morph','like','tilt']},{pos:'right:7vw;top:84px',z:1,d:.4,r:'5deg',ry:'-14deg',rx:'6deg',ids:['goo','stk','flip','rating']},{pos:'left:8vw;bottom:70px',z:1,d:.4,r:'5deg',ry:'14deg',rx:'-6deg',ids:['isl','toast','sheet','tabbar']},{pos:'right:5vw;bottom:80px',z:4,d:1,r:'-5deg',ry:'-16deg',rx:'-6deg',ids:['rev','scr','statcard','segmented']}];
+const SLOTS=[{pos:'left:5vw;top:92px',d:1,r:'-6deg',ry:'9deg',rx:'3deg',ids:['mag','morph','like','tilt']},{pos:'right:5vw;top:86px',d:.5,r:'5deg',ry:'-8deg',rx:'3deg',ids:['goo','stk','flip','rating']},{pos:'left:6vw;bottom:72px',d:.5,r:'5deg',ry:'8deg',rx:'-3deg',ids:['isl','toast','sheet','tabbar']},{pos:'right:6vw;bottom:80px',d:1,r:'-5deg',ry:'-9deg',rx:'-3deg',ids:['rev','scr','statcard','segmented']}];
 function bindTile(t){t.onclick=()=>openDetail(byId[t.dataset.id]);turnOn(t)}
 function setHero(){
-  hxBg.innerHTML=SLOTS.map((s,i)=>`<div class="flo" data-d="${s.d}" style="${s.pos};--z:${s.z};--r:${s.r};--ry:${s.ry};--rx:${s.rx};--dl:${-i*1.7}s">${tile(s.ids[0])}</div>`).join('');
+  hxBg.innerHTML=SLOTS.map((s,i)=>`<div class="flo" data-d="${s.d}" style="${s.pos};--r:${s.r};--ry:${s.ry};--rx:${s.rx};--dl:${-i*1.7}s">${tile(s.ids[0])}</div>`).join('');
   hxBg.querySelectorAll('.tile').forEach(bindTile);
   SLOTS.forEach((s,i)=>{
     let k=0;const t=hxBg.children[i].querySelector('.tile');
@@ -2041,7 +2169,7 @@ function setHero(){
   });
 }
 function fitHero(){
-  const fw=Math.max(150,Math.min(340,innerWidth*.2));
+  const fw=Math.max(140,Math.min(250,innerWidth*.15));
   hx.style.setProperty('--hh',Math.max(560,innerHeight)+'px');hx.style.setProperty('--fw',fw+'px');hx.style.setProperty('--zs',fw/244);
 }
 addEventListener('resize',fitHero);fitHero();
@@ -2052,7 +2180,7 @@ hx.addEventListener('pointermove',e=>{
   document.querySelectorAll('#hxT .ch').forEach(c=>{if(!c.offsetParent)return;c.style.transform='';const r=c.getBoundingClientRect(),dx=r.left+r.width/2-e.clientX,dy=r.top+r.height/2-e.clientY,d=Math.hypot(dx,dy),R=240;
     if(d<R){const f=(1-d/R)*64/(d||1);c.style.transform=`translate(${dx*f}px,${dy>0?dy*f*.15:dy*f}px) rotate(${dx*f*.25}deg)`}});
   const px=e.clientX/innerWidth-.5,py=e.clientY/innerHeight-.5;
-  document.querySelectorAll('.flo').forEach(f=>{const d=+f.dataset.d;f.style.translate=`${px*-70*d}px ${py*-50*d}px`;f.style.setProperty('--my',px*26*d+'deg');f.style.setProperty('--mx',py*-20*d+'deg')});
+  document.querySelectorAll('.flo').forEach(f=>{const d=+f.dataset.d;f.style.translate=`${px*-70*d}px ${py*-50*d}px`;f.style.setProperty('--my',px*14*d+'deg');f.style.setProperty('--mx',py*-10*d+'deg')});
 });
 hx.addEventListener('pointerleave',()=>document.querySelectorAll('#hxT .ch').forEach(c=>c.style.transform=''));
 document.getElementById('cue').onclick=()=>scrollTo({top:document.getElementById('main').offsetTop,behavior:'smooth'});
@@ -2065,7 +2193,7 @@ const AREAS=['a','b','d','c','e','f','g','h'];
 [...document.querySelectorAll('#cool .card')].forEach((c,i)=>{c.style.gridArea=AREAS[i];if(i===0)c.classList.add('big2');if(i===2)c.classList.add('wide')});
 // gallery folds to two rows
 gal.insertAdjacentHTML('afterend','<button class="gal-more" id="galMore"></button>');
-document.getElementById('galMore').onclick=()=>{galOpen=!galOpen;limitGal()};
+document.getElementById('galMore').onclick=()=>{const was=galOpen;galOpen=!galOpen;limitGal();if(!was){const n=[...gal.children].filter(c=>!c.hidden).slice(8);n.forEach((c,i)=>c.animate([{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:420,delay:Math.min(i,12)*28,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}))}else glide(gal)};
 limitGal();
 
 // ---------- language: follows the system, switch is remembered ----------
