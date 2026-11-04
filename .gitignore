@@ -1,8 +1,3 @@
 .DS_Store
-# superseded drafts
-preview.html
-search-preview.html
-hero-preview.html
-style-*.html
-nav-preview.html
-mobile-preview.html
+# old versions and previews, kept locally only
+drafts/
