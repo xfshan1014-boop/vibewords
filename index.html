@@ -857,7 +857,6 @@ body.sv-open .sv{opacity:1;pointer-events:auto;transform:none;transition:opacity
 .sv-bar .cpbtn{margin:0;flex:none;padding:6px 13px;font-size:13px}
 .sv-body{flex:1;overflow:auto}
 @media (max-width:560px){.sv-bar{justify-content:space-between}.sv-bar b{display:none}}
-.sv-body .site{max-width:1200px;margin:0 auto}
 /* 8-bit: habit quest site */
 .w8{background:#1a1c2c;color:#f4f4f4;font-family:'Press Start 2P','DotGothic16',monospace;min-height:760px;padding:18px 34px 34px;font-size:11px;line-height:1.7}
 html[data-lang="zh"] .w8{font-family:'DotGothic16','Press Start 2P',monospace;font-size:17px}
@@ -969,7 +968,7 @@ html[data-lang="zh"] .w8 h2{font-size:24px}
 .wb nav{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 26px;background:#fff;border-bottom:3px solid #000;font-weight:800}
 .wb nav b{font-size:22px;font-weight:900}
 .wb nav span{padding:6px 12px;border:3px solid #000;background:#4d7cff;color:#fff;box-shadow:3px 3px 0 #000}
-.wb .mq{display:flex;gap:30px;padding:7px 0;background:#000;color:#ffe14d;font-weight:800;white-space:nowrap;animation:wbm 12s linear infinite}
+.wb .mq{display:flex;width:max-content;gap:30px;padding:7px 0;background:#000;color:#ffe14d;font-weight:800;white-space:nowrap;animation:wbm 12s linear infinite}
 @keyframes wbm{to{transform:translateX(-300px)}}
 .wb .h{position:relative;padding:44px 34px 30px}
 .wb h1{font-size:96px;line-height:.95;font-weight:900;letter-spacing:-.02em}
@@ -2044,7 +2043,7 @@ const PAGES={
    ${[['客厅','Living room','3 盏灯开着','3 lights on'],['卧室','Bedroom','空调 24°','AC at 24°'],['厨房','Kitchen','全部关闭','All off'],['书房','Study','台灯开着','Desk lamp on']].map(r=>`<div class="r rm"><b>${L(r[0],r[1])}</b><span class="tg"><i></i></span><p style="margin-top:10px">${L(r[2],r[3])}</p></div>`).join('')}</div>
    <div class="sc"><span>${L('回家','Home')}</span><span>${L('离家','Away')}</span><span>${L('睡眠','Sleep')}</span><span>${L('观影','Movie')}</span></div></div>`,
  brutal:()=>{const w=L('做完再说 ★ 别再拖了 ★ 今天就开始 ★ ','JUST SHIP IT ★ STOP WAITING ★ START TODAY ★ ');
-   return `<div class="wb"><nav><b>DONE.</b><span>${L('免费开始','Start free')}</span></nav><div class="mq">${[1,2,3,4,5].map(()=>`<span>${w}</span>`).join('')}</div><div class="h"><span class="st2">${L('新！','NEW!')}</span><h1>${L('别再<u>列清单</u>了','Stop <u>listing.</u>')}</h1><p>${L('一天只做三件事。做完，就下班。','Three things a day. Finish them, then log off.')}</p><span class="cta">${L('开始做 →','Get going →')}</span></div>
+   return `<div class="wb"><nav><b>DONE.</b><span>${L('免费开始','Start free')}</span></nav><div class="mq">${[1,2,3,4,5,6,7,8,9,10,11,12].map(()=>`<span>${w}</span>`).join('')}</div><div class="h"><span class="st2">${L('新！','NEW!')}</span><h1>${L('别再<u>列清单</u>了','Stop <u>listing.</u>')}</h1><p>${L('一天只做三件事。做完，就下班。','Three things a day. Finish them, then log off.')}</p><span class="cta">${L('开始做 →','Get going →')}</span></div>
    <div class="f"><div><b>${L('三件事','Three tasks')}</b>${L('多一件都不让加。','Not one more allowed.')}</div><div><b>${L('没有提醒','No reminders')}</b>${L('你是成年人。','You\'re an adult.')}</div><div><b>${L('一键归零','One reset')}</b>${L('明天重新开始。','Tomorrow starts clean.')}</div></div></div>`}
 };
 document.getElementById('styCnt').textContent=String(STY.length).padStart(2,'0');
@@ -2072,8 +2071,16 @@ function openStyle(id){
   document.getElementById('svName').innerHTML=L(...x.n);
   document.getElementById('svSite').innerHTML=PAGES[id]();
   svCopy.dataset.id=id;svCopy.innerHTML=IDLE;svCopy.onclick=()=>doCopy(svCopy);
-  sv.querySelector('.sv-body').scrollTop=0;document.body.classList.add('sv-open');
+  sv.querySelector('.sv-body').scrollTop=0;document.body.classList.add('sv-open');fitStyle();
 }
+// the sample site fills the whole window: scaled up from a 1200px design, and at least one screen tall
+function fitStyle(){
+  const body=sv.querySelector('.sv-body'),site=document.getElementById('svSite'),root=site.firstElementChild;
+  if(!root)return;
+  const big=innerWidth>560,z=big?Math.max(1,innerWidth/1200):1;
+  site.style.zoom=z;root.style.minHeight=big?body.clientHeight/z+'px':'';
+}
+addEventListener('resize',fitStyle);
 function closeStyle(){document.body.classList.remove('sv-open')}
 document.getElementById('svBack').onclick=closeStyle;
 document.querySelectorAll('.sty-stage').forEach(st=>{
