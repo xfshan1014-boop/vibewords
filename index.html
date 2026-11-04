@@ -1036,7 +1036,7 @@ html{overflow-x:clip}
 .flo .tile{width:100%;height:calc(var(--fw,200px)*.74);box-shadow:5px 5px 0 #2B2118}
 .flo .tile .z{transform:translate(-50%,-50%) scale(var(--zs,.82))}
 @keyframes bob{from{transform:rotate(var(--r)) translateY(-7px)}to{transform:rotate(calc(var(--r)*.6)) translateY(9px)}}
-@media (max-width:1000px) and (max-height:720px){.flo{display:none}}
+.hx.no-flo .flo{display:none}
 @media (max-width:1000px){
   .hx{--tile:100px}
   .hx-l{font-size:16px}
@@ -1200,7 +1200,15 @@ html{scroll-padding-top:24px}
   .chip:hover,.q-opts button:hover,.qz-o button:not(:disabled):hover,.rpl:hover,.cp:hover{transform:none;box-shadow:none}
   .cpbtn:hover{transform:none;box-shadow:2px 2px 0 var(--ink)}
   .stage .tap,.stage:hover .tap{display:none}
+  .search:hover{transform:none}
+  .ex:hover,.style-hit:hover{border-color:var(--hair)}
+  .hit:hover .thumb{box-shadow:none}
+  .words button:hover{color:inherit}
+  .back:hover{background:none}
+  .card:active,.hit:active,.ex:active,.style-hit:active{transform:scale(.98);transition:transform .1s ease-out}
 }
+.dlg,.sv-body,.hp{overscroll-behavior:contain}
+html{-webkit-tap-highlight-color:transparent}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -2218,14 +2226,22 @@ function setHero(){
   });
 }
 function fitHero(){
-  const fw=Math.max(140,Math.min(250,innerWidth*.15));
-  hx.style.setProperty('--hh',Math.max(560,innerHeight)+'px');hx.style.setProperty('--fw',fw+'px');hx.style.setProperty('--zs',fw/244);
+  const hh=Math.max(innerWidth<=560?600:560,innerHeight);
+  hx.style.setProperty('--hh',hh+'px');
+  // the four cards use whatever room the title leaves, so they show on short phones too
+  const inH=document.getElementById('hxIn').offsetHeight,room=(hh-inH)/2-92-12,base=Math.max(140,Math.min(250,innerWidth*.15));
+  const fw=innerWidth<=760?Math.min(base,room/.74):base;
+  hx.classList.toggle('no-flo',fw<84||innerHeight<420);
+  hx.style.setProperty('--fw',fw+'px');hx.style.setProperty('--zs',fw/244);
 }
-addEventListener('resize',fitHero);fitHero();
+// a phone's toolbar hiding fires resize too: only refit when the width really changes
+let heroW=innerWidth;
+addEventListener('resize',()=>{if(cardOpens.matches&&innerWidth===heroW)return;heroW=innerWidth;fitHero()});fitHero();
+document.fonts?.ready.then(fitHero);
 addEventListener('scroll',()=>hx.style.setProperty('--p',Math.min(1,scrollY/innerHeight)),{passive:true});
 hx.prepend(document.querySelector('.top'));
 hx.addEventListener('pointermove',e=>{
-  if(hx.classList.contains('act'))return;
+  if(e.pointerType!=='mouse'||hx.classList.contains('act'))return;
   document.querySelectorAll('#hxT .ch').forEach(c=>{if(!c.offsetParent)return;c.style.transform='';const r=c.getBoundingClientRect(),dx=r.left+r.width/2-e.clientX,dy=r.top+r.height/2-e.clientY,d=Math.hypot(dx,dy),R=240;
     if(d<R){const f=(1-d/R)*64/(d||1);c.style.transform=`translate(${dx*f}px,${dy>0?dy*f*.15:dy*f}px) rotate(${dx*f*.25}deg)`}});
   const px=e.clientX/innerWidth-.5,py=e.clientY/innerHeight-.5;
@@ -2249,7 +2265,7 @@ limitGal();
 function setLang(l,save){
   const h=document.documentElement;h.dataset.lang=l;h.lang=l==='zh'?'zh-CN':'en';
   document.title='VibeWords-Design Language for AI Builders';
-  setPH();
+  setPH();fitHero();
   document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===l));
   if(save){try{localStorage.setItem('dv-lang',l)}catch(e){}}
   document.querySelectorAll('.d-tabs').forEach(moveTab);
